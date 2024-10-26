@@ -17,6 +17,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_loadDataButton_3_clicked();
+
+    void on_clearMemoryButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
