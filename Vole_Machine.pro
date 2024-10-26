@@ -13,6 +13,7 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Vole_Machine.h \
     mainwindow.h
 
 FORMS += \
