@@ -1,13 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
-
 
 class CPU;
 class Register;
 class Memory;
 class Machine;
-
 
 class Register
 {
@@ -17,19 +16,22 @@ private:
 
 public:
     int get_cell(int);
-    void set_cell(int , int);
+    void set_cell_in_register(int, string);
 };
 
-class Memory{
+class Memory
+{
 private:
     string memory[256];
     int size = 256;
+
 public:
     string get_cell(int);
-    void set_cell(int , string);
+    void set_cell(int, int);
 };
 
-class CPU{
+class CPU
+{
 private:
     Memory *ptr;
     int PC;
@@ -37,31 +39,31 @@ private:
     Register reg;
 
 public:
-    CPU(Memory* memory) : ptr(memory), PC(0), IR("") {}
+    CPU(Memory *memory) : ptr(memory), PC(0), IR("") {}
     string hexa_to_dec(string);
     string dec_to_hexa(string);
+    int two_complement(int, int);
     bool is_valid();
-    void add(int , int , int , Register&);
-    void load(int , int , Register& , Memory&);
-    void load(int , int , Register&);
-    void store(int , int , Register& , Memory&);
-    void move(int , int ,Register&);
-    void jump(int , int , Register& , int&);
+    int floating_point_notation(int, int);
+    void add5(int, int, int, Register &);
+    void add6(int, int, int, Register &);
+    void load(int, int , Register &, Memory &);
+    void load(int, int, Register &);
+    void store(int,int, Register &, Memory &);
+    void move(int, int, Register &);
+    void jump(int, int, Register &, int &);
     void halt();
-    void runNextStep(Memory*);
-    void fetch(Memory*);
+    void runNextStep(Memory *);
+    void fetch(Memory *);
     vector<int> decode();
-    void excute(Register& , Memory* , vector<int>);
+    void excute(Register &, Memory *, vector<int>);
 };
 
-
-
-
-class Machine{
+class Machine
+{
 private:
     Memory storage;
-    CPU cpu(Memory*);
+    CPU cpu(Memory *);
+
 public:
-
 };
-
