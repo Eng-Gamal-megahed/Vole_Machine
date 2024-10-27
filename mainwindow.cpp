@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     for (int i = 0; i < 16; ++i) {
-        ui->listWidget->addItem(QString::fromStdString(std::to_string(col) + std::to_string(row)) + " : ");
+        ui->listWidget->addItem(QString::fromStdString(std::to_string(col) + std::to_string(row)) + " : 00");
         row++;
         if(row == 10)
         {
@@ -42,6 +42,15 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
     row = col = 0;
+
+    for (int i = 0; i < ui->mainMemoryTable_3->rowCount(); ++i) {
+        for (int j = 0; j < ui->mainMemoryTable_3->columnCount(); ++j) {
+            QTableWidgetItem *item = ui->mainMemoryTable_3->item(i, j);
+            if (!item) {
+                ui->mainMemoryTable_3->setItem(i , j , new QTableWidgetItem(QString::fromStdString("00")));
+            }
+        }
+    }
 }
 
 MainWindow::~MainWindow()
@@ -65,11 +74,15 @@ void MainWindow::on_clearMemoryButton_3_clicked()
     for (int i = 0; i < ui->mainMemoryTable_3->rowCount(); ++i) {
         for (int j = 0; j < ui->mainMemoryTable_3->columnCount(); ++j) {
             QTableWidgetItem *item = ui->mainMemoryTable_3->item(i, j);
-            if (item) {
-                item->setText("");  // Clear the text of each cell
-            }
+                item->setText("00");
         }
     }
     row = col = 0;
+}
+
+
+void MainWindow::on_runButton_3_clicked()
+{
+
 }
 

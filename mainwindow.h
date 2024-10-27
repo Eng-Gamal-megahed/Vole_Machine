@@ -22,6 +22,8 @@ private slots:
 
     void on_clearMemoryButton_3_clicked();
 
+    void on_runButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

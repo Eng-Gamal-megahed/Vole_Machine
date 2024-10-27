@@ -4,9 +4,7 @@ using namespace std;
 
 
 class CPU;
-class CU;
 class Register;
-class ALU;
 class Memory;
 class Machine;
 
@@ -18,27 +16,17 @@ private:
     int size = 16;
 
 public:
-    int get_cell(int*);
-    void set_cell(int* , int);
+    int get_cell(int);
+    void set_cell(int , int);
 };
 
-class ALU{
-
-};
-
-class CU{
-public:
-    void load(int , int , Register& , Memory&);
-    void load(int , int , Register&);
-    void store(int , int , Register& , )
-};
 class Memory{
 private:
     string memory[256];
     int size = 256;
 public:
-    string get_cell(int*);
-    void set_cell(int* , string);
+    string get_cell(int);
+    void set_cell(int , string);
 };
 
 class CPU{
@@ -47,10 +35,19 @@ private:
     int PC;
     string IR;
     Register reg;
-    CU cu;
-    ALU alu;
+
 public:
-    CPU(Memory*);
+    CPU(Memory* memory) : ptr(memory), PC(0), IR("") {}
+    string hexa_to_dec(string);
+    string dec_to_hexa(string);
+    bool is_valid();
+    void add(int , int , int , Register&);
+    void load(int , int , Register& , Memory&);
+    void load(int , int , Register&);
+    void store(int , int , Register& , Memory&);
+    void move(int , int ,Register&);
+    void jump(int , int , Register& , int&);
+    void halt();
     void runNextStep(Memory*);
     void fetch(Memory*);
     vector<int> decode();
@@ -63,7 +60,7 @@ public:
 class Machine{
 private:
     Memory storage;
-    CPU cpu;
+    CPU cpu(Memory*);
 public:
 
 };
