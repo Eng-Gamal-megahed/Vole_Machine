@@ -16,7 +16,7 @@ private:
 
 public:
     int get_cell(int);
-    void set_cell_in_register(int, string);
+    void set_cell(int, int);
 };
 
 class Memory
@@ -27,7 +27,7 @@ private:
 
 public:
     string get_cell(int);
-    void set_cell(int, int);
+    void set_cell(int, string);
 };
 
 class CPU
