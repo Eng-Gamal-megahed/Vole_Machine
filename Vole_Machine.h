@@ -16,7 +16,7 @@ private:
 
 public:
     int get_cell(int);
-    void set_cell_in_register(int, string);
+    void set_cell(int, int);
 };
 
 class Memory
@@ -27,7 +27,7 @@ private:
 
 public:
     string get_cell(int);
-    void set_cell(int, int);
+    void set_cell(int, string);
 };
 
 class CPU
@@ -42,7 +42,6 @@ public:
     CPU(Memory *memory) : ptr(memory), PC(0), IR("") {}
     string hexa_to_dec(string);
     string dec_to_hexa(string);
-    int two_complement(int, int);
     bool is_valid();
     int floating_point_notation(int, int);
     void add5(int, int, int, Register &);
