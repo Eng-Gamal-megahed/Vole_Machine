@@ -11,7 +11,7 @@ class Machine;
 class Register
 {
 private:
-    int memory[16];
+    float memory[16];
     int size = 16;
 
 public:
@@ -43,7 +43,6 @@ public:
     string hexa_to_dec(string);
     string dec_to_hexa(string);
     bool is_valid();
-    //int floating_point_notation(int, int);
     void add5(int, int, int, Register &);
     void add6(int, int, int, Register &);
     void load(int, int , Register &, Memory &);

@@ -11,8 +11,7 @@ void CPU::add5(int cellR, int cellS, int cellT, Register &reg)
 
 void CPU::add6(int cellR, int cellS, int cellT, Register &reg)
 {
-    CPU temp;
-    reg.set_cell(cellR, temp.floating_point_notation(cellS, cellT));
+    reg.set_cell(cellR, reg.get_cell(cellS)+reg.get_cell(cellT));
 }
 
 // Load (1) to store the content of some cell in memory in the registre
@@ -38,11 +37,6 @@ void CPU::move(int cell1, int cell2, Register & reg)
 {
     //Move the content of cell1 to cell2 in register.
     reg.set_cell(cell2, reg.get_cell(cell1));
-}
-
-int CPU::floating_point_notation(int, int)
-{
-    return 0;
 }
 
 
