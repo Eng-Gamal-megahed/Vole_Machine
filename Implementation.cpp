@@ -20,8 +20,7 @@ int CPU::floating_point_notation(int, int)
 
 void CPU::add5(int cellR, int cellS, int cellT, Register &reg)
 {
-    CPU temp;
-    reg.set_cell_in_register(cellR, temp.two_complement(cellS, cellT));
+    reg.set_cell_in_register(cellR, (reg.get_cell(cellS)+reg.get_cell(cellT)));
 }
 
 void CPU::add6(int cellR, int cellS, int cellT, Register &reg)

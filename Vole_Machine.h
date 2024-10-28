@@ -42,9 +42,8 @@ public:
     CPU(Memory *memory) : ptr(memory), PC(0), IR("") {}
     string hexa_to_dec(string);
     string dec_to_hexa(string);
-    int two_complement(int, int);
     bool is_valid();
-    int floating_point_notation(int, int);
+    //int floating_point_notation(int, int);
     void add5(int, int, int, Register &);
     void add6(int, int, int, Register &);
     void load(int, int , Register &, Memory &);
