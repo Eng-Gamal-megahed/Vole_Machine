@@ -26,10 +26,14 @@ void CPU::load(int index_of_reg, int val, Register &reg)
 {
     reg.set_cell(index_of_reg, val);
 }
+
+
 void CPU::store(int cell_in_reg, int cell_in_memo, Register & reg, Memory & memo)
 {
     memo.set_cell(cell_in_memo, reg.get_cell(cell_in_reg));
 }
+
+
 void CPU::move(int cell1, int cell2, Register & reg)
 {
     //Move the content of cell1 to cell2 in register.
@@ -40,6 +44,8 @@ int CPU::floating_point_notation(int, int)
 {
     return 0;
 }
+
+
 string Memory::get_cell(int idx)
 {
     return memory[idx];
