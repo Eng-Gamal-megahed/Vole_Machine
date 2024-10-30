@@ -11,12 +11,12 @@ class Machine;
 class Register
 {
 private:
-    float memory[16];
+    string memory[16];
     int size = 16;
 
 public:
-    int get_cell(int);
-    void set_cell(int, int);
+    string get_cell(int);
+    void set_cell(int, string);
 };
 
 class Memory
@@ -41,7 +41,9 @@ private:
 public:
     CPU(Memory *memory) : ptr(memory), PC(0), IR("") {}
     string hexa_to_dec(string);
-    string dec_to_hexa(string);
+    string dec_to_hexa(int);
+    int get_twos_comp(int);
+    int convert_to_twos_comp(int);
     bool is_valid();
     void add5(int, int, int, Register &);
     void add6(int, int, int, Register &);
