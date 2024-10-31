@@ -43,7 +43,9 @@ public:
     string hexa_to_dec(string);
     string dec_to_hexa(int);
     int get_twos_comp(int);
-    int convert_to_twos_comp(int);
+    float get_float(int);
+    string get_binary(float);
+    int convert_from_float(string);
     bool is_valid();
     void add5(int, int, int, Register &);
     void add6(int, int, int, Register &);
