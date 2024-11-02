@@ -256,7 +256,7 @@ void CPU::execute(Register &, Memory *, vector<int> vec){
     }
     else if (vec[0] == 11)
     {
-        Jump ()
+        Jump();
     }
     else if (vec[0] == 12 && vec[1] == 0 && vec[2] == 0)
     {
