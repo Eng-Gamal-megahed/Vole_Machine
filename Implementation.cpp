@@ -30,7 +30,7 @@ void CPU::move(int cell1, int cell2, Register & reg)
     reg.set_cell(cell2, reg.get_cell(cell1));
 }
 
-void CPU::jump(int cell_reg, int cell_mem, Register & reg , int&)
+void CPU::jump(int cell_reg, int cell_mem, Register & reg)
 {
     if(reg.get_cell(0)==reg.get_cell(cell_reg)){
         pc = cell_mem;

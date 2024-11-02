@@ -86,7 +86,7 @@ public:
     void load(int, int, Register &);
     void store(int,int, Register &, Memory &);
     void move(int, int, Register &);
-    void jump(int, int, Register & , int &);
+    void jump(int, int, Register &);
     void halt();
     void runNextStep(Memory *);
     void fetch(Memory *);
