@@ -30,9 +30,9 @@ void CPU::move(int cell1, int cell2, Register & reg)
     reg.set_cell(cell2, reg.get_cell(cell1));
 }
 
-
-
-
+void CPU::jump(int , int, Register &, int &)
+{
+}
 
 // ==================================================== Gamal =================================================
 
