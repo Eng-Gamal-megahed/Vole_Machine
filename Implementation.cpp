@@ -37,7 +37,13 @@ void CPU::jumpB(int cell_reg, int cell_mem, Register & reg)
     }
 }
 
-
+void CPU::jumpD(int cellR, int cellXY, Register &reg)
+{
+    if (reg.get_cell(cellR) > reg.get_cell(0))
+    {
+        pc = cellXY;
+    }
+}
 
 // ==================================================== Gamal =================================================
 
@@ -264,4 +270,5 @@ void CPU::execute(Register &, Memory *, vector<int> vec){
     }
 
 }
+
 
