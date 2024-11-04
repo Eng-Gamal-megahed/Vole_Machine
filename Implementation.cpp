@@ -41,7 +41,7 @@ void CPU::jumpB(int cell_reg, int cell_mem, Register &reg)
 
 void CPU::jumpD(int cellR, int cellXY, Register &reg)
 {
-    if (reg.get_cell(cellR) > reg.get_cell(0))
+    if (get_twos_comp(reg.get_cell(cellR)) > get_twos_comp(reg.get_cell(0)))
     {
         PC = cellXY;
     }
