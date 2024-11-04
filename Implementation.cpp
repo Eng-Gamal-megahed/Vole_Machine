@@ -195,13 +195,13 @@ void CPU::fetch(Memory *){
 vector<int> CPU::decode(){
 
     vector<int> operation(3);
-    if (IR.size() == 10 ){
-        string newIR = to_string(IR[2]);
-        newIR += to_string(IR[5]);
-        newIR += to_string(IR[8]);
-        newIR += to_string(IR[9]);
-        IR = newIR;
-    }
+    // if (IR.size() == 10){
+    //     string newIR = to_string(IR[2]);
+    //     newIR += to_string(IR[5]);
+    //     newIR += to_string(IR[8]);
+    //     newIR += to_string(IR[9]);
+    //     IR = newIR;
+    // }
 
     if (IR.size() != 4 ){
         return operation;
