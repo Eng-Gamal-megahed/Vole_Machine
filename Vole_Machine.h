@@ -86,12 +86,19 @@ public:
     void load(int, int, Register &);
     void store(int,int, Register &, Memory &);
     void move(int, int, Register &);
-    void jump(int, int, Register &);
+    void jumpB(int, int, Register &);
     void halt();
     void runNextStep(Memory *);
     void fetch(Memory *);
     vector<int> decode();
     void execute(Register &, Memory *, vector<int>);
+    //
+    void OR(int, int, int, Register &);
+    void AND(int, int, int, Register &);
+    void XOR(int, int, int, Register &);
+    void jumpD(int, int, Register &);
+    void Rotate(int , int , Register &);
+    //
 };
 
 class Machine
