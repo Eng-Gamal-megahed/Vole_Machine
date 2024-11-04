@@ -1,7 +1,10 @@
-#include "Vole_Machine.h"
+#include "VoleMachine.h"
+#include <iostream>
+#include <vector>
 #include <string>
-#include <cmath>
 #include <sstream>
+#include <cmath>
+using namespace std;
 
 //========================================================Walid Adel ===========================================================================
 
@@ -246,54 +249,94 @@ vector<int> CPU::decode()
     return operation;
 }
 
-void CPU::execute(Register &, Memory *, vector<int> vec)
-{
+void CPU::execute(Register &, Memory *, vector<int> vec){
 
     string reg_address = dec_to_hexa(vec[2]);
 
     if (vec[0] == 1)
     {
-        load(vec[1], vec[2], reg, *ptr); // the value is converted into decimal and stored ******* not hex
+        load( vec[1], vec[2] , reg , * ptr); // the value is converted into decimal and stored ******* not hex
     }
 
     else if (vec[0] == 2)
     {
-        load(vec[1], vec[2], reg);
+        load (vec[1] , vec[2] , reg);
     }
 
     else if (vec[0] == 3)
     {
+
         if (vec[2] == 0)
         {
             cout << reg.get_cell(vec[1]) << endl;
         }
 
-        store(vec[1], vec[2], reg, *ptr);
+        store( vec[1], vec[2],  reg, * ptr);
     }
 
     else if (vec[0] == 4)
     {
-        move(stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
+        move(stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16),  reg);
     }
 
     else if (vec[0] == 5)
     {
-        add5(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
+        add5(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
     }
 
     else if (vec[0] == 6)
     {
-        add6(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
+        add6(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
     }
+
+    else if (vec[0] == 7)
+    {
+        OR(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+    }
+
+    else if (vec[0] == 8)
+    {
+        AND(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+    }
+
+    else if (vec[0] == 9)
+    {
+        XOR(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+    }
+
+    else if (vec[0] == 10)
+    {
+        Rotate( vec[1]  , vec[2] , reg);
+    }
+
     else if (vec[0] == 11)
     {
-        jumpB();
+        jumpB(vec[1], vec[2], reg);
     }
-    else if (vec[0]==13){
-        jumpD();
-    }
+
     else if (vec[0] == 12 && vec[1] == 0 && vec[2] == 0)
     {
         exit(0); // Halt ()
     }
+
+    else if (vec[0] == 13)
+    {
+        jumpD(vec[1], vec[2], reg);
+    }
+
+}
+
+void CPU::OR (int result_reg, int reg1, int reg2, Register & reg)
+{
+    reg.set_cell( result_reg , dec_to_hexa(reg1 | reg2) );
+}
+
+void CPU::AND (int result_reg, int reg1, int reg2, Register & reg)
+{
+    reg.set_cell( result_reg , dec_to_hexa(reg1 & reg2) );
+}
+
+void CPU::XOR (int result_reg, int reg1, int reg2, Register & reg)
+{
+    reg.set_cell( result_reg , dec_to_hexa(reg1 ^ reg2) );
 }
