@@ -43,7 +43,7 @@ void CPU::jumpD(int cellR, int cellXY, Register &reg)
 {
     if (reg.get_cell(cellR) > reg.get_cell(0))
     {
-        pc = cellXY;
+        PC = cellXY;
     }
 }
 
