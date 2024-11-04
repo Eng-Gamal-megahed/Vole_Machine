@@ -79,7 +79,7 @@ public:
     float get_float(int);
     string get_binary(float);
     int convert_from_float(string);
-    bool is_valid();
+    bool is_valid(string );
     void add5(int, int, int, Register &);
     void add6(int, int, int, Register &);
     void load(int, int , Register &, Memory &);
