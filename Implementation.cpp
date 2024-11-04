@@ -3,6 +3,8 @@
 #include <cmath>
 #include <sstream>
 
+//========================================================Walid Adel ===========================================================================
+
 // Load (1) to store the content of some cell in memory in the registre
 void CPU::load(int cell_of_reg, int cell_of_memo, Register &reg, Memory &memo)
 {
@@ -40,6 +42,21 @@ void CPU::jumpD(int cellR, int cellXY, Register &reg)
     {
         pc = cellXY;
     }
+}
+
+bool CPU::is_valid(string stru)
+{
+    for (short i = 0; i < stru.size(); i++)
+    {
+        if (stru[i] == '0' and stru[i + 1] == 'X')
+        {
+            stru.erase(i, 2);
+            i--;
+        }
+    }
+    if (stru.size() == 4)
+        return true;
+    return false;
 }
 
 // ==================================================== Gamal =================================================
@@ -182,20 +199,7 @@ int CPU::convert_from_float(string float_bin)
     return stoi(result, nullptr, 2);
 }
 
-bool CPU::is_valid(string stru)
-{
-    for (short i = 0; i < stru.size(); i++)
-    {
-        if (stru[i] == '0' and stru[i + 1] == 'X')
-        {
-            stru.erase(i, 2);
-            i--;
-        }
-    }
-    if (stru.size() == 4)
-        return true;
-    return false;
-}
+
 
 // ====================================== Mustafa =======================================================
 
@@ -283,7 +287,10 @@ void CPU::execute(Register &, Memory *, vector<int> vec)
     }
     else if (vec[0] == 11)
     {
-        // jump();
+        jumpB();
+    }
+    else if (vec[0]==13){
+        jumpD();
     }
     else if (vec[0] == 12 && vec[1] == 0 && vec[2] == 0)
     {
