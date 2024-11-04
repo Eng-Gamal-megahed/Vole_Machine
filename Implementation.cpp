@@ -1,9 +1,9 @@
-#include "VoleMachine.h"
 #include <iostream>
-#include <vector>
 #include <string>
 #include <sstream>
 #include <cmath>
+#include "Vole_Machine.h"
+
 using namespace std;
 
 //========================================================Walid Adel ===========================================================================
@@ -17,7 +17,7 @@ void CPU::load(int cell_of_reg, int cell_of_memo, Register &reg, Memory &memo)
 // Load (2) to store the input direct in register (done)
 void CPU::load(int index_of_reg, int val, Register &reg)
 {
-    reg.set_cell(index_of_reg, to_string(val));
+    reg.set_cell(index_of_reg, dec_to_hexa(val));
 }
 
 void CPU::store(int cell_in_reg, int cell_in_memo, Register &reg, Memory &memo)
@@ -33,10 +33,10 @@ void CPU::move(int cell1, int cell2, Register &reg)
 
 void CPU::jumpB(int cell_reg, int cell_mem, Register &reg)
 {
-    if (reg.get_cell(0) == reg.get_cell(cell_reg))
-    {
-        PC = cell_mem;
-    }
+    // if (reg.get_cell(0) == reg.get_cell(cell_reg))
+    // {
+    //     PC = cell_mem;
+    // }
 }
 
 void CPU::jumpD(int cellR, int cellXY, Register &reg)
@@ -59,7 +59,7 @@ string lower(string str)
     return str;
 }
 
-bool CPU::is_valid(string stru)
+bool is_valid(string stru)
 {
     stru = lower(stru);
 
@@ -85,6 +85,22 @@ bool CPU::is_valid(string stru)
 }
 
 // ==================================================== Gamal =================================================
+
+
+bool CPU::runNextStep()
+{
+    fetch();
+    execute(decode());
+    return true;
+}
+
+
+void CPU::Rotate(int cell , int moves , Register &reg)
+{
+    int val = stoi(reg.get_cell(cell) , nullptr , 16);
+    val = (val >> moves) | (val << (8 - moves));
+    reg.set_cell(cell , dec_to_hexa(val));
+}
 
 void CPU::add5(int cellR, int cellS, int cellT, Register &reg)
 {
@@ -122,25 +138,6 @@ string Register::get_cell(int idx)
 void Register::set_cell(int index, string val)
 {
     memory[index] = val;
-}
-
-string CPU::hexa_to_dec(string num)
-{
-    int res = 0;
-    for (int i = 0; i < num.size(); ++i)
-    {
-        int digit;
-        if (num[i] >= 'A' && num[i] <= 'f')
-        {
-            digit = num[i] - 55;
-        }
-        else
-        {
-            digit = num[i] - '0';
-        }
-        res += digit * (pow(16, i));
-    }
-    return to_string(res);
 }
 
 string CPU::dec_to_hexa(int val)
@@ -226,16 +223,8 @@ int CPU::convert_from_float(string float_bin)
 
 // ====================================== Mustafa =======================================================
 
-void CPU::fetch(Memory *)
+void CPU::fetch()
 {
-
-    if (PC > 255)
-    {
-        cout << "Memory ended!" << endl;
-        exit(0);
-    }
-
-    // Use PC as the address to fetch from memory
     IR = ptr->get_cell(PC);
     PC++; // Increment the Program Counter to the next instruction
     IR += ptr->get_cell(PC);
@@ -246,31 +235,19 @@ vector<int> CPU::decode()
 {
 
     vector<int> operation(3);
-    if (IR.size() == 10)
-    {
-        string newIR = to_string(IR[2]);
-        newIR += to_string(IR[5]);
-        newIR += to_string(IR[8]);
-        newIR += to_string(IR[9]);
-        IR = newIR;
-    }
-
-    if (IR.size() != 4)
-    {
-        return operation;
-    }
-
-    operation[0] = IR[0] - '0';
-    cout << stoi(string(1, IR[1]), nullptr, 16) << endl;
+    operation[0] = stoi(string(1, IR[0]), nullptr, 16);
     operation[1] = stoi(string(1, IR[1]), nullptr, 16);
-    cout << stoi(IR.substr(2, 2), nullptr, 16) << endl;
     operation[2] = stoi(IR.substr(2, 2), nullptr, 16);
 
     return operation;
 }
 
+<<<<<<< HEAD
+bool CPU::execute(vector<int>vec){
+=======
 void CPU::execute(Register &, Memory *, vector<int> vec)
 {
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 
     string reg_address = dec_to_hexa(vec[2]);
 
@@ -289,7 +266,7 @@ void CPU::execute(Register &, Memory *, vector<int> vec)
 
         if (vec[2] == 0)
         {
-            cout << reg.get_cell(vec[1]) << endl;
+            screen += reg.get_cell(vec[1]);
         }
 
         store(vec[1], vec[2], reg, *ptr);
@@ -337,26 +314,43 @@ void CPU::execute(Register &, Memory *, vector<int> vec)
 
     else if (vec[0] == 12 && vec[1] == 0 && vec[2] == 0)
     {
-        exit(0); // Halt ()
+        return false;
     }
 
     else if (vec[0] == 13)
     {
         jumpD(vec[1], vec[2], reg);
     }
+<<<<<<< HEAD
+    return true;
+=======
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 }
 
 void CPU::OR(int result_reg, int reg1, int reg2, Register &reg)
 {
+<<<<<<< HEAD
+    reg.set_cell( result_reg , dec_to_hexa( stoi( reg.get_cell(reg1)  , nullptr, 16) | stoi( reg.get_cell(reg2)  , nullptr, 16) ) );
+=======
     reg.set_cell(result_reg, dec_to_hexa(reg1 | reg2));
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 }
 
 void CPU::AND(int result_reg, int reg1, int reg2, Register &reg)
 {
+<<<<<<< HEAD
+    reg.set_cell( result_reg , dec_to_hexa( stoi( reg.get_cell(reg1)  , nullptr, 16) & stoi( reg.get_cell(reg2)  , nullptr, 16) ) );
+=======
     reg.set_cell(result_reg, dec_to_hexa(reg1 & reg2));
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 }
 
 void CPU::XOR(int result_reg, int reg1, int reg2, Register &reg)
 {
+<<<<<<< HEAD
+    reg.set_cell( result_reg , dec_to_hexa(  stoi( reg.get_cell(reg1)  , nullptr, 16) ^  stoi( reg.get_cell(reg2)  , nullptr,16)));
+}
+=======
     reg.set_cell(result_reg, dec_to_hexa(reg1 ^ reg2));
 }
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065

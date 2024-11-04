@@ -47,12 +47,16 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <QMessageBox>
+
 using namespace std;
 
 class CPU;
 class Register;
 class Memory;
-class Machine;
+
+
+bool is_valid(string);
 
 class Register
 {
@@ -83,16 +87,22 @@ private:
     int PC;
     string IR;
     Register reg;
-
+    string screen;
 public:
     CPU(Memory *memory) : ptr(memory), PC(0), IR("") {}
-    string hexa_to_dec(string);
+    string get_screen()
+    {
+        return screen;
+    }
+    Register get_reg()
+    {
+        return reg;
+    }
     string dec_to_hexa(int);
     int get_twos_comp(int);
     float get_float(int);
-    string get_binary(float);
     int convert_from_float(string);
-    bool is_valid(string );
+    string get_binary(float);
     void add5(int, int, int, Register &);
     void add6(int, int, int, Register &);
     void load(int, int , Register &, Memory &);
@@ -101,10 +111,10 @@ public:
     void move(int, int, Register &);
     void jumpB(int, int, Register &);
     void halt();
-    void runNextStep(Memory *);
-    void fetch(Memory *);
+    bool runNextStep();
+    void fetch();
     vector<int> decode();
-    void execute(Register &, Memory *, vector<int>);
+    bool execute(vector<int>);
     //
     void OR(int, int, int, Register &);
     void AND(int, int, int, Register &);
@@ -114,11 +124,4 @@ public:
     //
 };
 
-class Machine
-{
-private:
-    Memory storage;
-    CPU cpu(Memory *);
 
-public:
-};

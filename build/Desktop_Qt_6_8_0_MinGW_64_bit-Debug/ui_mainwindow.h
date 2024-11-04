@@ -141,7 +141,7 @@ public:
         cpuGroupBox_3->setObjectName("cpuGroupBox_3");
         layoutWidget_2 = new QWidget(cpuGroupBox_3);
         layoutWidget_2->setObjectName("layoutWidget_2");
-        layoutWidget_2->setGeometry(QRect(10, 30, 261, 471));
+        layoutWidget_2->setGeometry(QRect(10, 30, 262, 471));
         horizontalLayout_3 = new QHBoxLayout(layoutWidget_2);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
         horizontalLayout_3->setContentsMargins(0, 0, 0, 0);
