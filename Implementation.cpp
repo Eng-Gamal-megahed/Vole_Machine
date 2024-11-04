@@ -47,21 +47,36 @@ void CPU::jumpD(int cellR, int cellXY, Register &reg)
     }
 }
 
+#include <string>
+#include <cctype>
+
+string lower(string str)
+{
+    for (char &ch : str)
+    {
+        ch = tolower(ch);
+    }
+    return str;
+}
+
 bool CPU::is_valid(string stru)
 {
-    for (short i = 0; i < stru.size(); i++)
-    {
-        if (stru[i] == '0' and stru[i + 1] == 'X')
+    stru = lower(stru);
+
+    for (size_t i = 0; i < stru.size() - 1; i++)
+    { 
+        if (stru[i] == '0' && stru[i + 1] == 'x')
         {
             stru.erase(i, 2);
             i--;
         }
     }
+
     if (stru.size() == 4)
     {
         for (short i = 0; i < 4; i++)
         {
-            if (!((stru[i] >= '0' and stru[i] <= '9') or (stru[i] >= 'A' and stru[i] <= 'F')))
+            if (!((stru[i] >= '0' && stru[i] <= '9') || (stru[i] >= 'a' && stru[i] <= 'f')))
                 return false;
         }
         return true;
