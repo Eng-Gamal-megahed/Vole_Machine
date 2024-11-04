@@ -58,7 +58,14 @@ bool is_valid(string stru)
         }
     }
     if (stru.size() == 4)
+    {
+        for (short i = 0; i < 4; i++)
+        {
+            if (!((stru[i] >= '0' and stru[i] <= '9') or (stru[i] >= 'A' and stru[i] <= 'F')))
+                return false;
+        }
         return true;
+    }
     return false;
 }
 
@@ -199,8 +206,6 @@ int CPU::convert_from_float(string float_bin)
     return stoi(result, nullptr, 2);
 }
 
-
-
 // ====================================== Mustafa =======================================================
 
 void CPU::fetch()
@@ -222,18 +227,23 @@ vector<int> CPU::decode()
     return operation;
 }
 
+<<<<<<< HEAD
 bool CPU::execute(vector<int>vec){
+=======
+void CPU::execute(Register &, Memory *, vector<int> vec)
+{
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 
     string reg_address = dec_to_hexa(vec[2]);
 
     if (vec[0] == 1)
     {
-        load( vec[1], vec[2] , reg , * ptr); // the value is converted into decimal and stored ******* not hex
+        load(vec[1], vec[2], reg, *ptr); // the value is converted into decimal and stored ******* not hex
     }
 
     else if (vec[0] == 2)
     {
-        load (vec[1] , vec[2] , reg);
+        load(vec[1], vec[2], reg);
     }
 
     else if (vec[0] == 3)
@@ -244,42 +254,42 @@ bool CPU::execute(vector<int>vec){
             screen += reg.get_cell(vec[1]);
         }
 
-        store( vec[1], vec[2],  reg, * ptr);
+        store(vec[1], vec[2], reg, *ptr);
     }
 
     else if (vec[0] == 4)
     {
-        move(stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16),  reg);
+        move(stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
     }
 
     else if (vec[0] == 5)
     {
-        add5(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+        add5(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
     }
 
     else if (vec[0] == 6)
     {
-        add6(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+        add6(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
     }
 
     else if (vec[0] == 7)
     {
-        OR(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+        OR(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
     }
 
     else if (vec[0] == 8)
     {
-        AND(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+        AND(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
     }
 
     else if (vec[0] == 9)
     {
-        XOR(vec[1], stoi( string (1, reg_address[0])  , nullptr, 16), stoi( string (1, reg_address[1])  , nullptr, 16), reg);
+        XOR(vec[1], stoi(string(1, reg_address[0]), nullptr, 16), stoi(string(1, reg_address[1]), nullptr, 16), reg);
     }
 
     else if (vec[0] == 10)
     {
-        Rotate( vec[1]  , vec[2] , reg);
+        Rotate(vec[1], vec[2], reg);
     }
 
     else if (vec[0] == 11)
@@ -296,20 +306,36 @@ bool CPU::execute(vector<int>vec){
     {
         jumpD(vec[1], vec[2], reg);
     }
+<<<<<<< HEAD
     return true;
+=======
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 }
 
-void CPU::OR (int result_reg, int reg1, int reg2, Register & reg)
+void CPU::OR(int result_reg, int reg1, int reg2, Register &reg)
 {
+<<<<<<< HEAD
     reg.set_cell( result_reg , dec_to_hexa( stoi( reg.get_cell(reg1)  , nullptr, 16) | stoi( reg.get_cell(reg2)  , nullptr, 16) ) );
+=======
+    reg.set_cell(result_reg, dec_to_hexa(reg1 | reg2));
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 }
 
-void CPU::AND (int result_reg, int reg1, int reg2, Register & reg)
+void CPU::AND(int result_reg, int reg1, int reg2, Register &reg)
 {
+<<<<<<< HEAD
     reg.set_cell( result_reg , dec_to_hexa( stoi( reg.get_cell(reg1)  , nullptr, 16) & stoi( reg.get_cell(reg2)  , nullptr, 16) ) );
+=======
+    reg.set_cell(result_reg, dec_to_hexa(reg1 & reg2));
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
 }
 
-void CPU::XOR (int result_reg, int reg1, int reg2, Register & reg)
+void CPU::XOR(int result_reg, int reg1, int reg2, Register &reg)
 {
+<<<<<<< HEAD
     reg.set_cell( result_reg , dec_to_hexa(  stoi( reg.get_cell(reg1)  , nullptr, 16) ^  stoi( reg.get_cell(reg2)  , nullptr,16)));
 }
+=======
+    reg.set_cell(result_reg, dec_to_hexa(reg1 ^ reg2));
+}
+>>>>>>> 6639ad5b129633573cc7ffabd57b9854f4b2e065
